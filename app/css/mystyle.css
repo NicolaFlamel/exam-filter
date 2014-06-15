@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 20px;
+}
+
+.left-control-panel {
+    width: 19%;
+    float: left;
+    position: relative;
+    margin-right: 10px;
+}
+
+.right-product-panel {
+    width: 80%;
+    float: right;
+    position: relative;
+}
+
+.add-form{
+    width:300px;
+    position: absolute;
+}

@@ -1,0 +1,104 @@
+<div class="wrapper" ng-controller="productFilterCtrl">
+    <table class="table table-striped left-control-panel">
+        <thead>
+        <tr>
+            <td>
+                Control panel
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td check-box-brands>
+                <label>Brands</label>
+                <input type="checkbox" ng-click="productChoose('GoPro')"/> GoPro <br/>
+                <input type="checkbox" ng-click="productChoose('DOD')"/> DOD <br/>
+                <input type="checkbox" ng-click="productChoose('Aspiring')"/> Aspiring <br/>
+                <input type="checkbox" ng-click="productChoose('Globex')"/> Globex <br/>
+                <input type="checkbox" ng-click="productChoose('Falcon')"/> Falcon <br/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Price</label>
+                <input type="text" placeholder="From" ng-model="priceFrom"/>
+                <input type="text" placeholder="To" ng-model="priceTo"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Matrix</label>
+
+                <p>
+                    <label for="amount">Resolution range:</label>
+                    <input type="text" id="amount">
+                </p>
+
+                <div id="slider-range" filter-slider></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Products list -->
+    <table class="table table-striped right-product-panel">
+        <thead>
+        <tr>
+            <td>
+                Title
+            </td>
+            <td>
+                Price
+            </td>
+            <td>
+                Brand
+            </td>
+            <td>
+                Resolution
+            </td>
+            <td>
+                Admin button
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in productList | checkPriceFrom:priceFrom:priceTo | checkMatrixSlide:productResolutionFrom:productResolutionTo | filter:cameraFilter">
+            <td>
+                {{product.title}}
+            </td>
+            <td>
+                {{product.price}}
+            </td>
+            <td>
+                {{product.brand}}
+            </td>
+            <td>
+                {{product.resolution}}
+            </td>
+            <td>
+                <button ng-click="deleteProduct(product.title)">Delete</button>
+            </td>
+            <td>
+                <button ng-click="changeProduct(product.title,product.price,product.brand,product.resolution)">Change</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form class="add-form" style="width:220px;top:450px;">
+        <input type="text" placeholder="Name of product" ng-model="title" required/><br/>
+        <input type="text" placeholder="Price of product" ng-model="price" required/><br/>
+        <input type="text" placeholder="Brand of product" ng-model="brand" required/><br/>
+        <input type="text" placeholder="Resolution of product" ng-model="resolution" required/><br/>
+        <button ng-click="addProduct()"> Add product</button>
+    </form>
+
+    <div id="dialog-modal" title="Basic modal dialog" style="display: none;">
+        <form ng-submit="change()">
+            Title: <br/><input type="text" ng-model="changeTitle"/>
+            Price:<br/><input type="text" ng-model="changePrice"/>
+            Brand:<br/><input type="text" ng-model="changeBrand"/>
+            Resolution:<br/><input type="text" ng-model="changeResolution"/>
+            <button>Change</button>
+        </form>
+    </div>
+
+</div>
